@@ -16,8 +16,10 @@
 import re
 import sys
 
+futuboxPrefix = 'futubox'
+
 pat = r'#EXTINF:0,([0-9]+),'
-replacement = r'#EXTINF:-1 tvg-id="futubox\1",'
+replacement = r'#EXTINF:-1 tvg-id="' + futuboxPrefix + '\\1",'
 
 inFileName = sys.argv[1]
 outFileName = sys.argv[2]

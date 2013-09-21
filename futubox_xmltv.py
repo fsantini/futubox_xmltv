@@ -24,6 +24,8 @@ chanlistFile = 'futubox_channels.csv'
 chanmapFile = 'futubox_chan_map.csv'
 # output XML guide file
 outXMLFile = 'futubox_guide.xml'
+#prefix added to IDs
+futuboxPrefix = 'futubox'
 
 def convertDateTime(datestamp):
   #converts 2013-09-14T00:30:00+02:00 into 20130914003000 +0200
@@ -42,7 +44,7 @@ with open(chanlistFile, 'rb') as csvfile:
     
 for chanID, chanName in enumerate(chanNames):
   if chanName != '':
-    chanElement = ET.SubElement(tv, 'channel', {'id': "futubox" + str(chanID+1)})
+    chanElement = ET.SubElement(tv, 'channel', {'id': futuboxPrefix + str(chanID+1)})
     dnameElement = ET.SubElement(chanElement, 'display-name')
     dnameElement.text = chanName
 
@@ -65,7 +67,7 @@ for chanID, chanURL in enumerate(chanURLs):
     end = convertDateTime(prog.find('end-at').text)
     title = prog.find('title').text
     if not title: continue
-    progXMLOut = ET.SubElement(tv, 'programme', {'start': start, 'stop': end, 'channel': "futubox" + str(chanID+1)})
+    progXMLOut = ET.SubElement(tv, 'programme', {'start': start, 'stop': end, 'channel': futuboxPrefix + str(chanID+1)})
     progXMLTitle = ET.SubElement(progXMLOut, 'title')
     progXMLTitle.text = title.strip()
   chanXML.close()
